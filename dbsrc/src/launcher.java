@@ -23,7 +23,7 @@ public class launcher extends Application{
 
     @Override
     public void start(final Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(launcher.class.getResource("GUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(launcher.class.getResource("UI.fxml"));
         Pane root = (Pane) loader.load();
 
         Scene scene = new Scene(new Group(root));
