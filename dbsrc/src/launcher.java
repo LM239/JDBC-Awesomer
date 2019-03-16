@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 import java.io.IOException;
 
-public class launcher extends Application{
+public class launcher extends Application {
 
 
     public static void main(String[] args) {
@@ -31,11 +31,10 @@ public class launcher extends Application{
         stage.setScene(scene);
         stage.show();
         letterbox(scene, root);
-        stage.setMaximized(true);
     }
 
     private void letterbox(final Scene scene, final Pane contentPane) {
-        final double initWidth  = scene.getWidth();
+        final double initWidth = scene.getWidth();
         final double initHeight = scene.getHeight();
         final double ratio = initWidth / initHeight;
         SceneSizeChangeListener sizeListener = new SceneSizeChangeListener(scene, ratio, initHeight, initWidth, contentPane);
@@ -60,18 +59,27 @@ public class launcher extends Application{
 
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-            final double newWidth  = scene.getWidth();
-            final double newHeight = scene.getHeight();
-            double scaleFactor = newWidth / newHeight > ratio ? newHeight / initHeight : newWidth / initWidth;
+      final double newWidth  = scene.getWidth();
+      final double newHeight = scene.getHeight();
 
-            Scale scale = new Scale(scaleFactor, scaleFactor);
-            scale.setPivotX(0);
-            scale.setPivotY(0);
-            scene.getRoot().getTransforms().setAll(scale);
+      double scaleFactor =
+          newWidth / newHeight > ratio
+              ? newHeight / initHeight
+              : newWidth / initWidth;
 
-            contentPane.setPrefWidth (newWidth  / scaleFactor);
-            contentPane.setPrefHeight(newHeight / scaleFactor);
-        }
+      if (scaleFactor >= 1) {
+        Scale scale = new Scale(scaleFactor, scaleFactor);
+        scale.setPivotX(0);
+        scale.setPivotY(0);
+        scene.getRoot().getTransforms().setAll(scale);
+
+        contentPane.setPrefWidth (newWidth  / scaleFactor);
+        contentPane.setPrefHeight(newHeight / scaleFactor);
+      } else {
+        contentPane.setPrefWidth (Math.max(initWidth,  newWidth));
+        contentPane.setPrefHeight(Math.max(initHeight, newHeight));
+      }
     }
+  }
 }
 
