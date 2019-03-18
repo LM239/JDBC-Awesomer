@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -12,22 +14,22 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBCtrl">
    <children>
-      <AnchorPane prefHeight="485.0" prefWidth="830.0">
+      <AnchorPane prefHeight="557.0" prefWidth="830.0">
          <children>
-            <TextArea fx:id="commandOutput" editable="false" layoutX="14.0" layoutY="245.0" prefHeight="231.0" prefWidth="415.0" />
+            <TextArea fx:id="commandOutput" editable="false" layoutX="14.0" layoutY="245.0" prefHeight="304.0" prefWidth="414.0" />
             <TitledPane animated="false" collapsible="false" layoutX="14.0" layoutY="14.0" prefHeight="224.0" prefWidth="202.0" text="Legg til apparatsøvelse">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="100.0" layoutY="157.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Legg til" />
-                        <TextField layoutX="63.0" layoutY="14.0" prefHeight="26.0" prefWidth="124.0" />
+                        <Button layoutX="100.0" layoutY="157.0" mnemonicParsing="false" onAction="#addMachineExercise" prefHeight="26.0" prefWidth="82.0" text="Legg til" />
+                        <TextField fx:id="machineExerciseName" layoutX="67.0" layoutY="14.0" prefHeight="26.0" prefWidth="124.0" />
                         <Label layoutX="14.0" layoutY="19.0" text="Navn:" />
                         <Label layoutX="11.0" layoutY="52.0" text="Apparat:" />
-                        <TextField layoutX="66.0" layoutY="48.0" prefHeight="26.0" prefWidth="124.0" />
+                        <TextField fx:id="machineExerciseMachine" layoutX="67.0" layoutY="48.0" prefHeight="26.0" prefWidth="124.0" />
                         <Label layoutX="11.0" layoutY="89.0" text="Kilo" />
-                        <TextField layoutX="66.0" layoutY="85.0" prefHeight="26.0" prefWidth="124.0" />
+                        <TextField fx:id="machineExerciseWeight" layoutX="67.0" layoutY="85.0" prefHeight="26.0" prefWidth="124.0" />
                         <Label layoutX="11.0" layoutY="123.0" text="Sett:" />
-                        <TextField layoutX="66.0" layoutY="119.0" prefHeight="26.0" prefWidth="124.0" />
+                        <TextField fx:id="machineExerciseReps" layoutX="66.0" layoutY="119.0" prefHeight="26.0" prefWidth="124.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -36,11 +38,11 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="100.0" layoutY="157.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Legg til" />
-                        <TextField layoutX="64.0" layoutY="14.0" prefHeight="26.0" prefWidth="124.0" />
+                        <Button layoutX="100.0" layoutY="157.0" mnemonicParsing="false" onAction="#addExercise" prefHeight="26.0" prefWidth="82.0" text="Legg til" />
+                        <TextField fx:id="exerciseName" layoutX="64.0" layoutY="14.0" prefHeight="26.0" prefWidth="124.0" />
                         <Label layoutX="15.0" layoutY="19.0" text="Navn:" />
                         <Label layoutX="15.0" layoutY="50.0" text="Beskrivelse:" />
-                        <TextArea layoutX="14.0" layoutY="70.0" prefHeight="82.0" prefWidth="172.0" />
+                        <TextArea fx:id="exerciseDesc" layoutX="14.0" layoutY="70.0" prefHeight="82.0" prefWidth="172.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -49,21 +51,53 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="374.0">
                      <children>
-                        <Button layoutX="303.0" layoutY="139.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="Legg til" />
-                        <DatePicker layoutX="160.0" layoutY="139.0" prefHeight="26.0" prefWidth="138.0" />
-                        <TextField layoutX="81.0" layoutY="139.0" prefHeight="26.0" prefWidth="35.0" />
-                        <TextField layoutX="120.0" layoutY="139.0" prefHeight="26.0" prefWidth="35.0" />
+                        <Button layoutX="303.0" layoutY="139.0" mnemonicParsing="false" onAction="#addWorkout" prefHeight="26.0" prefWidth="66.0" text="Legg til" />
+                        <DatePicker fx:id="workoutDate" layoutX="160.0" layoutY="139.0" prefHeight="26.0" prefWidth="138.0" />
+                        <TextField fx:id="workoutHour" layoutX="81.0" layoutY="139.0" prefHeight="26.0" prefWidth="35.0" />
+                        <TextField fx:id="workoutMin" layoutX="120.0" layoutY="139.0" prefHeight="26.0" prefWidth="35.0" />
                         <Label layoutX="117.0" layoutY="144.0" text=":" />
-                        <ChoiceBox layoutX="86.0" layoutY="14.0" prefHeight="26.0" prefWidth="51.0" />
-                        <ChoiceBox layoutX="86.0" layoutY="52.0" prefHeight="26.0" prefWidth="51.0" />
+                        <ChoiceBox fx:id="workoutForm" layoutX="86.0" layoutY="14.0" prefHeight="26.0" prefWidth="51.0" value="1">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="1" />
+                                  <String fx:value="2" />
+                                  <String fx:value="3" />
+                                  <String fx:value="4" />
+                                  <String fx:value="5" />
+                                  <String fx:value="6" />
+                                  <String fx:value="7" />
+                                  <String fx:value="8" />
+                                  <String fx:value="9" />
+                                  <String fx:value="10" />
+                              </FXCollections>
+                           </items>
+                        </ChoiceBox>
+                         <ChoiceBox fx:id="workoutPerf" layoutX="86.0" layoutY="52.0" prefHeight="26.0" prefWidth="51.0" value="1">
+                             <items>
+                                 <FXCollections fx:factory="observableArrayList">
+                                     <String fx:value="1" />
+                                     <String fx:value="2" />
+                                     <String fx:value="3" />
+                                     <String fx:value="4" />
+                                     <String fx:value="5" />
+                                     <String fx:value="6" />
+                                     <String fx:value="7" />
+                                     <String fx:value="8" />
+                                     <String fx:value="9" />
+                                     <String fx:value="10" />
+                                 </FXCollections>
+                             </items>
+                         </ChoiceBox>
                         <Label layoutX="16.0" layoutY="19.0" text="Form:" />
                         <Label layoutX="16.0" layoutY="56.0" text="Prestasjon:" />
-                        <TextField layoutX="150.0" layoutY="15.0" prefHeight="26.0" prefWidth="100.0" promptText="Navn på øvelse" />
-                        <Button layoutX="259.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Legg til øvelse" />
-                        <TextArea editable="false" layoutX="150.0" layoutY="52.0" prefHeight="82.0" prefWidth="213.0" promptText="Ingen øvelser er lagt til                     Legg til en av gangen" />
+                        <TextField fx:id="workoutExercise" layoutX="150.0" layoutY="15.0" prefHeight="26.0" prefWidth="100.0" promptText="Navn på øvelse" />
+                        <Button layoutX="259.0" layoutY="14.0" mnemonicParsing="false" onAction="#addExerciseToList" prefHeight="26.0" prefWidth="30.0" text="+" />
+                        <TextArea fx:id="workoutExercises" editable="false" layoutX="150.0" layoutY="52.0" prefHeight="82.0" prefWidth="122.0" promptText="Ingen øvelser er lagt til                     Legg til en av gangen" />
                         <Label layoutX="13.0" layoutY="94.0" text="Varighet(h):" />
-                        <TextField layoutX="86.0" layoutY="90.0" prefHeight="26.0" prefWidth="47.0" />
+                        <TextField fx:id="workoutDuration" layoutX="86.0" layoutY="90.0" prefHeight="26.0" prefWidth="47.0" />
                         <Label layoutX="16.0" layoutY="143.0" text="Tidspunkt:" />
+                        <Button fx:id="clearExercises" layoutX="295.0" layoutY="14.0" mnemonicParsing="false" onAction="#clearExercises" prefHeight="26.0" prefWidth="70.0" text="Fjern alt" />
+                        <TextArea fx:id="workoutNote" layoutX="274.0" layoutY="52.0" prefHeight="82.0" prefWidth="87.0" promptText="Trenings notat" />
                      </children>
                   </AnchorPane>
                </content>
@@ -72,8 +106,8 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="104.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Hent" />
-                        <TextField layoutX="14.0" layoutY="15.0" prefHeight="26.0" prefWidth="81.0" promptText="n" />
+                        <Button layoutX="104.0" layoutY="14.0" mnemonicParsing="false" onAction="#getLatestWorkouts" prefHeight="26.0" prefWidth="82.0" text="Hent" />
+                        <TextField fx:id="numberOfWorkouts" layoutX="14.0" layoutY="15.0" prefHeight="26.0" prefWidth="81.0" promptText="n" />
                      </children>
                   </AnchorPane>
                </content>
@@ -82,11 +116,11 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="201.0">
                      <children>
-                        <Button layoutX="110.0" layoutY="43.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Hent" />
-                        <DatePicker layoutX="109.0" layoutY="10.0" prefHeight="26.0" prefWidth="79.0" />
-                        <DatePicker layoutX="14.0" layoutY="9.0" prefHeight="26.0" prefWidth="79.0" />
+                        <Button layoutX="110.0" layoutY="43.0" mnemonicParsing="false" onAction="#getExerciseFromInterval" prefHeight="26.0" prefWidth="82.0" text="Hent" />
+                        <DatePicker fx:id="toDate" layoutX="109.0" layoutY="10.0" prefHeight="26.0" prefWidth="79.0" />
+                        <DatePicker fx:id="fromDate" layoutX="14.0" layoutY="9.0" prefHeight="26.0" prefWidth="79.0" />
                         <Label layoutX="98.0" layoutY="14.0" text="-" />
-                        <TextField layoutX="15.0" layoutY="44.0" prefHeight="26.0" prefWidth="88.0" promptText="Øvelse" />
+                        <TextField fx:id="intervalExercise" layoutX="15.0" layoutY="44.0" prefHeight="26.0" prefWidth="88.0" promptText="Øvelse" />
                      </children>
                   </AnchorPane>
                </content>
@@ -95,9 +129,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="157.0">
                      <children>
-                        <Button layoutX="5.0" layoutY="26.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Hent" />
-                        <Button layoutX="78.0" layoutY="26.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Opprett" />
-                        <TextField layoutX="4.0" layoutY="2.0" promptText="Navn" />
+                        <Button layoutX="5.0" layoutY="26.0" mnemonicParsing="false" onAction="#getExerciseGroup" prefHeight="26.0" prefWidth="70.0" text="Hent" />
+                        <Button layoutX="78.0" layoutY="26.0" mnemonicParsing="false" onAction="#createExerciseGroup" prefHeight="26.0" prefWidth="70.0" text="Opprett" />
+                        <TextField fx:id="exerciseGroup" layoutX="4.0" layoutY="2.0" promptText="Navn" />
                      </children>
                   </AnchorPane>
                </content>
@@ -106,18 +140,37 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="165.0">
                      <children>
-                        <Button layoutX="71.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Oppdater" />
-                        <TextField layoutX="62.0" layoutY="14.0" prefHeight="26.0" prefWidth="96.0" />
+                        <Button layoutX="71.0" layoutY="84.0" mnemonicParsing="false" onAction="#addExerciseToGroup" prefHeight="26.0" prefWidth="82.0" text="Oppdater" />
+                        <TextField fx:id="targetGroup" layoutX="62.0" layoutY="14.0" prefHeight="26.0" prefWidth="96.0" />
                         <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gruppe:" />
-                        <TextField layoutX="62.0" layoutY="49.0" prefHeight="26.0" prefWidth="96.0" />
+                        <TextField fx:id="exerciseToAdd" layoutX="62.0" layoutY="49.0" prefHeight="26.0" prefWidth="96.0" />
                         <Text layoutX="14.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Øvelse:" />
                      </children>
                   </AnchorPane>
                </content>
             </TitledPane>
-            <Button layoutX="555.0" layoutY="446.0" mnemonicParsing="false" text="Antall øvelser" />
-            <TextField layoutX="442.0" layoutY="446.0" prefHeight="26.0" prefWidth="100.0" promptText="Apparat" />
+            <TitledPane animated="false" collapsible="false" layoutX="441.0" layoutY="446.0" prefHeight="103.0" prefWidth="202.0" text="Legg til apparat">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="198.0">
+                     <children>
+                        <TextField fx:id="machineToAdd" layoutX="14.0" layoutY="40.0" prefHeight="26.0" prefWidth="100.0" promptText="Apparat" />
+                        <Button layoutX="125.0" layoutY="40.0" mnemonicParsing="false" onAction="#addMachine" prefHeight="26.0" prefWidth="38.0" text="+" />
+                        <TextField fx:id="machineToAddDesc" layoutX="14.0" layoutY="9.0" promptText="Beskrivelse" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
          </children>
       </AnchorPane>
+      <TitledPane animated="false" collapsible="false" layoutX="654.0" layoutY="481.0" prefHeight="66.0" prefWidth="166.0" text="Hent antall øvelser">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="targetMachine" layoutX="9.0" layoutY="8.0" prefHeight="26.0" prefWidth="100.0" promptText="Apparat" />
+                  <Button layoutX="115.0" layoutY="8.0" mnemonicParsing="false" onAction="#getExerciseNumb" prefHeight="26.0" prefWidth="46.0" text="Hent" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
    </children>
 </AnchorPane>
